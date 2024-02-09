@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\ArticleController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ArticleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +23,8 @@ Route::get('/articles/detail/{id}',[ArticleController::class, 'detail']);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/articles/add',[ArticleController::class,'add']);
+
+Route::post('/articles/add', [ArticleController::class, 'create']);
+Route::get('/articles/delete/{id}',[ArticleController::class,'delete']);

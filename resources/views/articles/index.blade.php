@@ -2,6 +2,11 @@
 
 @section('content')
     <div class="container">
+        @if (session('info'))
+            <div class="alert alert-info">
+                {{ session('info') }}
+            </div>
+        @endif
         {{ $articles->links('pagination::bootstrap-5') }}
         @foreach ($articles as $article)
             <div class="card mb-2">
@@ -14,6 +19,7 @@
                         {{ $article->body }}
                     </p>
                     <a class="card-link" href="{{ url("/articles/detail/$article->id") }}">View Detail &raquo;</a>
+                    <a class="card-link btn-danger" href="{{ url("/articles/delete/$article->id") }}">Delete &raquo;</a>
                 </div>
             </div>
         @endforeach

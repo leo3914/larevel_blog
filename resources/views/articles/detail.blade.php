@@ -24,14 +24,20 @@
                     <a href="{{ url("/comment/delete/$comment->id") }}" class="btn-close float-end">
                     </a>
                     {{ $comment->content }}
+                    <div class="small mt-2">
+                        By <b>{{ $comment->user->name }}</b>,
+                        {{ $comment->created_at->diffForHumans() }}
+                    </div>
                 </li>
             @endforeach
         </ul>
-        <form action="{{ url('/comment/add') }}" method="post">
-            @csrf
-            <input type="hidden" name="article_id" value="{{ $article->id }}">
-            <textarea name="content" class="form-control mb-2" placeholder="New Comment"></textarea>
-            <input type="submit" value="Add Comment" class="btn btn-secondary">
-        </form>
+        @auth
+            <form action="{{ url('/comment/add') }}" method="post">
+                @csrf
+                <input type="hidden" name="article_id" value="{{ $article->id }}">
+                <textarea name="content" class="form-control mb-2" placeholder="New Comment"></textarea>
+                <input type="submit" value="Add Comment" class="btn btn-secondary">
+            </form>
+        @endauth
     </div>
 @endsection

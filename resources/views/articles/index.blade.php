@@ -20,7 +20,9 @@
                         {{ $article->body }}
                     </p>
                     <a class="card-link" href="{{ url("/articles/detail/$article->id") }}">View Detail &raquo;</a>
-                    <a class="card-link btn-danger" href="{{ url("/articles/delete/$article->id") }}">Delete &raquo;</a>
+                    @can('article-delete',$article)
+                        <a class="card-link btn-danger" href="{{ url("/articles/delete/$article->id") }}">Delete &raquo;</a>
+                    @endcan
                 </div>
             </div>
         @endforeach

@@ -9,9 +9,11 @@
                     Category : <b>{{ $article->category->name }}</b>
                 </div>
                 <p class="card-text">{{ $article->body }}</p>
-                <a class="btn btn-warning" href="{{ url("/articles/delete/$article->id") }}">
-                    Delete
-                </a>
+                @can('article-delete', $article)
+                    <a class="btn btn-warning" href="{{ url("/articles/delete/$article->id") }}">
+                        Delete
+                    </a>
+                @endcan
             </div>
         </div>
 
@@ -21,8 +23,10 @@
             </li>
             @foreach ($article->comments as $comment)
                 <li class="list-group-item">
-                    <a href="{{ url("/comment/delete/$comment->id") }}" class="btn-close float-end">
-                    </a>
+                    @can('comment-delete',$comment)
+                        <a href="{{ url("/comment/delete/$comment->id") }}" class="btn-close float-end">
+                        </a>
+                    @endcan
                     {{ $comment->content }}
                     <div class="small mt-2">
                         By <b>{{ $comment->user->name }}</b>,
